@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.nav-link {
+  position: relative;
+  font-weight: 500;
+  
+}
+
+.tooltip-text {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  color: #333;
+  z-index: 10;
+  white-space: nowrap; 
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link:hover .tooltip-text {
+  display: block;
+  
+}
+
+
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.holygrail-grid {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr; /* 1 fraction for left sidebar, 3 fractions for content, 1 fraction for right sidebar */
+  grid-template-rows: auto 1fr auto; /* auto for header, 1 fraction for content, auto for footer */
+  height: 100vh;
+  grid-template-areas:
+      "header header header"
+      "leftsidebar maincontent rightsidebar"
+      "footer footer footer";
+}
+
+.header {
+  grid-area: header;
+}
+
+.left-sidebar {
+  grid-area: leftsidebar;
+}
+
+.maincontent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto; 
+}
+
+.right-sidebar {
+  grid-area: rightsidebar;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+.transparent-white-bg {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+
+.custom-image-button {
+  display: block;
+  cursor: pointer;
+  width: 150px;
+  height: auto;  
+  
+}
+
+.custom-button {
+  display: flex;
+  cursor: pointer;
+  width: 150px;
+  height: auto;
+  background-color: transparent;  
+  border: none;
+}
+
+.audio-container {
+  position: absolute;
+  top: 10px;  /* Adjust as necessary */
+  right: 10px; /* Adjust as necessary */
+  z-index: 10; /* Ensure it's above other elements */
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; 
+}
