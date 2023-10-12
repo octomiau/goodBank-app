@@ -64,7 +64,7 @@ function AllData() {
                             body={<img src="alldataCard.png" className="img-fluid" alt="Responsive image" />}
                         />
                         {auth.currentUser && (
-                            <a href="https://bad-bank-admin-8dced2dc97f9.herokuapp.com/" target="_blank" rel="noopener noreferrer">
+                            <a href="https://sea-lion-app-wriat.ondigitalocean.app/" target="_blank" rel="noopener noreferrer">
                                 <button className="custom-button" >
                                     <img src="push.png" className="img-fluid" alt="Button" />
                                 </button> 
