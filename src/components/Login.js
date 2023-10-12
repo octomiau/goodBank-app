@@ -1,12 +1,12 @@
+// Import necessary React components and Firebase functionalities
 import React from 'react';
 import { UserContext, Card } from './context';
 import { auth, db } from '../firebase';
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 import { get, ref } from 'firebase/database';
 
-
 function LogIn(){
+    // Background styling for the login page
     const bgStyle = {
         backgroundImage: 'url(/BGbank-login.png)',
         backgroundSize: 'cover',
@@ -19,8 +19,9 @@ function LogIn(){
         zIndex: -1
     }; 
 
-    const [show, setShow]         = React.useState(true);
-    const [status, setStatus]     = React.useState('');
+    // Local states to manage various UI functionalities and input data
+    const [show, setShow] = React.useState(true);
+    const [status, setStatus] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [emailError, setEmailError] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -29,7 +30,7 @@ function LogIn(){
     const [passwordError, setPasswordError] = React.useState('');
     const [name, setName] = React.useState('');
 
-  
+    // Function to validate email and password fields
     function validate(field, type) {
         if (!field) {
             switch(type) {
@@ -45,14 +46,13 @@ function LogIn(){
             return false;
         } else if (type === 'password' && field.length < 8) {
             setPasswordError('Password must be at least 8 characters long.');
-            alert('Password must be at least 8 characters long.');  // This line shows an alert to the user
+            alert('Password must be at least 8 characters long.');
             return false;
         }
         return true;
     }
-    
 
-    
+    // Function to handle email-password login
     async function handleLogin() {
         setNameError('');
         setPasswordError('');
@@ -67,19 +67,17 @@ function LogIn(){
             const snapshot = await get(userRef);
             if (snapshot.exists()) {
                 const userData = snapshot.val();
-                // Store name in state or context to display later
                 setName(userData.name); 
             }
     
             setShow(false);
-            setStatus(`Logged in successfully as!`);
+            setStatus(`Logged in successfully!`);
         } catch (error) {
             setStatus(error.message);
         }
     }  
     
-    
-
+    // Function to handle Google login
     async function handleGoogleLogin() {
         try {
             const result = await signInWithPopup(auth, new GoogleAuthProvider());
@@ -87,7 +85,7 @@ function LogIn(){
             if (result.additionalUserInfo?.isNewUser) {
                 setStatus("User created successfully!");
             } else {
-                setStatus("Logged in successfully with google!");
+                setStatus("Logged in successfully with Google!");
             }
         } catch (error) {
             console.error("Error during Google login", error);
@@ -95,6 +93,7 @@ function LogIn(){
         }
     }
 
+    // Function to clear the login form fields
     function clearForm() {
         setEmail('');
         setPassword('');
@@ -113,7 +112,7 @@ function LogIn(){
                         status={status}
                         body={show ? (
                             <>
-                                 Email address<br/>
+                                Email address<br/>
                                 <input type="input" className="form-control" id="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.currentTarget.value)}/><br/>
                                 {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
                                 Password<br />
@@ -134,6 +133,5 @@ function LogIn(){
         </>
     );
 }
-    
-export default LogIn;
-    
+
+export default LogIn

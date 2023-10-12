@@ -1,3 +1,4 @@
+// Import necessary React components and Firebase functionalities
 import React from 'react';
 import { UserContext, Card } from './context';
 

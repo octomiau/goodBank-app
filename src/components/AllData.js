@@ -4,11 +4,13 @@ import { Card } from './context';
 import { ref, onValue } from 'firebase/database';
 import { Link } from 'react-router-dom';
 
-
-
 function AllData() {
+    // State to hold all user transactions
     const [transactions, setTransactions] = useState([]);
-    const [total, setTotal] = useState(0);  // State to hold the total balance 
+    // State to hold the total user balance
+    const [total, setTotal] = useState(0);
+
+    // Background styling for the component
     const bgStyle = {
         backgroundImage: 'url(/BGbank-alldata.png)',
         backgroundSize: 'cover',
@@ -21,18 +23,23 @@ function AllData() {
         zIndex: -1
     };
 
+    // Effect hook to load user's transaction data from Firebase
     useEffect(() => {
+        // Check if a user is logged in
         if (auth.currentUser) {
             const userId = auth.currentUser.uid;
+            // Reference to user's transactions in Firebase
             const userRef = ref(db, 'users/' + userId + '/transactions');
 
+            // Listen for changes in the user's transaction data
             onValue(userRef, (snapshot) => {
                 const fbTransactions = snapshot.val() || {};
+                // Convert transactions object to an array for easier rendering
                 const transactionsList = Object.keys(fbTransactions).map(key => {
                     return { id: key, ...fbTransactions[key] };
                 });
 
-                // Calculate the total balance
+                // Calculate the total balance from all transactions
                 const totalBalance = transactionsList.reduce((acc, transaction) => {
                     if (transaction.type === 'deposit') {
                         return acc + parseFloat(transaction.amount);
@@ -42,17 +49,16 @@ function AllData() {
                     return acc;
                 }, 0);
                 
-                setTotal(totalBalance);  // Update the total balance
+                // Update local state with fetched data
+                setTotal(totalBalance);
                 setTransactions(transactionsList);
             });
         }
     }, []);
 
-    
-
     return (
         <>
-        <div className="maincontent">
+            <div className="maincontent">
                 <div style={bgStyle}></div>
                 <div className="row">
                     <div className="col-md-6">
@@ -63,9 +69,10 @@ function AllData() {
                             text=""
                             body={<img src="alldataCard.png" className="img-fluid" alt="Responsive image" />}
                         />
+                        {/* If user is authenticated, show a button linking to an external app */}
                         {auth.currentUser && (
                             <a href="https://sea-lion-app-wriat.ondigitalocean.app/" target="_blank" rel="noopener noreferrer">
-                                <button className="custom-button" >
+                                <button className="custom-button">
                                     <img src="push.png" className="img-fluid" alt="Button" />
                                 </button> 
                             </a>
@@ -83,10 +90,11 @@ function AllData() {
                                     </tr>
                                 </thead>
                                 <div>
-                                 <h4>${total}</h4>
-                                 </div>
-                                
+                                    {/* Display the total balance */}
+                                    <h4>${total}</h4>
+                                </div>
                                 <tbody>
+                                    {/* Iterate through transactions and render each one */}
                                     {transactions.map(transaction => (
                                         <tr key={transaction.id}>
                                             <td>{auth.currentUser && auth.currentUser.displayName}</td>
@@ -96,8 +104,7 @@ function AllData() {
                                         </tr>
                                     ))}
                                 </tbody>
-                                </table>
-                   
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -107,9 +114,3 @@ function AllData() {
 }
 
 export default AllData;
-
-
-
-
-
-

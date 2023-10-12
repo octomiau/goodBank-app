@@ -1,9 +1,12 @@
+// Import necessary React modules and components
 import React, { useContext } from 'react';
-import { UserContext } from './UserContext';
-import Profile from './Profile';  // Assuming you have a Profile component
-import AppMusic from'./AppMusic';
+import { UserContext } from './UserContext'; // Context to get the current user's data
+import Profile from './Profile'; // Component to show user's profile details
+import AppMusic from './AppMusic'; // Component to provide music functionality
 
+// NavBar component to render the navigation bar of the application
 function NavBar() {
+    // Retrieve the current user data from the UserContext
     const currentUser = useContext(UserContext);
     return (
         <>

@@ -1,3 +1,4 @@
+// Import necessary React components and Firebase functionalities
 import React from 'react';
 import { UserContext, Card } from './context';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -8,6 +9,7 @@ import { db, auth } from '../firebase';
 
 
 function CreateAccount(){
+    // Background styling for the create account page
     const bgStyle = {
         backgroundImage: 'url(/BGbank-createaccount.png)',
         backgroundSize: 'cover',
@@ -20,6 +22,7 @@ function CreateAccount(){
         zIndex: -1
     }; 
 
+    // Local states for form inputs, errors, UI toggles, etc.
     const [show, setShow]         = React.useState(true);
     const [status, setStatus]     = React.useState('');
     const [name, setName]         = React.useState('');
@@ -30,7 +33,9 @@ function CreateAccount(){
     const [emailError, setEmailError] = React.useState('');
     const [passwordError, setPasswordError] = React.useState('');
   
+    // Function to validate form fields
     function validate(field, type) {
+        // Validation based on the type of field
         if (!field) {
             switch(type) {
                 case 'name':
@@ -69,6 +74,8 @@ function CreateAccount(){
         setShow(false);
     }
     
+    
+    // Function to handle account creation using Google auth
     async function handleGoogleLogin() {
         try {
             const result = await signInWithPopup(auth, new GoogleAuthProvider());
@@ -84,26 +91,25 @@ function CreateAccount(){
         }
     }
 
+    // Function to handle creating account using email and password
     async function handleEmailSignUp() {
         try {
-            // Create a new user with the given email and password
+            // Create a new user with the provided email and password
             const result = await createUserWithEmailAndPassword(auth, email, password);
-
-            // If you want to store additional user data (e.g., name, initial balance) in Firebase, do it here
+            // Store additional user data (e.g., name) in Firebase
             const userRef = ref(db, 'users/' + result.user.uid);
             set(userRef, {
                 name: name,
                 balance: 0
             });
-
             setStatus("Account created successfully!");
-
         } catch (error) {
             console.error("Error signing up with email and password", error);
             setStatus("Error during sign up: " + error.message);
         }
     }
   
+    // Function to clear form inputs
     function clearForm(){
       setName('');
       setEmail('');

@@ -1,3 +1,4 @@
+// Import necessary React components and Firebase functionalities
 import React from 'react';
 import { UserContext, Card } from './context';
 import { db, auth } from '../firebase'; 
@@ -5,6 +6,7 @@ import { push, set, ref, get } from 'firebase/database';
 
 
 function Deposit(){
+    // Background styling for the deposit page
     const bgStyle = {
         backgroundImage: 'url(/BGbank-deposit.png)',
         backgroundSize: 'cover',
@@ -17,6 +19,7 @@ function Deposit(){
         zIndex: -1
     };
 
+    // Local states to manage UI functionalities and input data
     const [show, setShow]         = React.useState(true);
     const [status, setStatus]     = React.useState('');
     const [deposit, setDeposit]         = React.useState('');
@@ -24,6 +27,7 @@ function Deposit(){
     const [depositError, setDepositError] = React.useState('');
     const [balance, setBalance] = React.useState(0);
 
+    // Effect to fetch the balance for the logged-in user from Firebase once the component is mounted
     React.useEffect(() => {
         if (auth.currentUser) {
             const userId = auth.currentUser.uid;
@@ -36,7 +40,7 @@ function Deposit(){
         }
     }, []);
     
-  
+    // Function to validate the deposit amount
     function validate(field, type) {
         if (!field && type === 'deposit') {
             setDepositError('Deposit is required.');
@@ -50,7 +54,8 @@ function Deposit(){
         }
         return true;
     }
-  
+
+    // Function to handle deposit creation in Firebase
     function handleCreate() {
         if (auth.currentUser) {
             const userId = auth.currentUser.uid;
@@ -79,7 +84,8 @@ function Deposit(){
         
       
     }  
-  
+    
+    // Function to clear the deposit form fields
     function clearForm(){
         setShow(true);
     }
