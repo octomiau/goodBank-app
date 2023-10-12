@@ -1,29 +1,33 @@
-# Bad Banking App
+# Good Bank React Application
 
-Bad Banking is a simple React application that simulates basic banking operations. It includes a login system, account creation, deposit, withdrawal, balance checking, and transaction history. It is called "Bad Banking" because it stores and displays the entered data.
-<img src="./public/githubScreen.png">
+The Good Bank React Application is a banking web application that enables users to create accounts, view all transactions, make deposits, and listen to background music while navigating through different pages. Administrators can also view all transaction data via the Admin Dashboard.
+<img src="./public/githubScreenshot.png">
 
 ## 🌟 Features:
 
-- User-friendly web interface for banking operations.
-- Login and account creation with form validation.
-- Secure transactions with error handling.
-- Real-time balance updates.
-- Transaction history display.
+-User Authentication: Enables users to sign up using their email address or Google account.
+-Transactions: Allows users to make deposits and view all their transactions.
+-Background Music: Offers an immersive experience by playing background music, which can be toggled on/off.
+-Admin Dashboard: Allows administrators to view all transactions from all users.
+-Responsive Design: Offers a seamless experience across devices.
 
 ## 🔧 Installation:
+
+**Prerequisites**
+Node.js
+Firebase account for backend authentication and data storage.
 
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/your-username/bad-banking-app.git
+   git clone https://github.com/octomiau/bad-banking-app.git
     ```
 
 
 2. **Navigate to the Project Directory**:
 
 ```bash
-cd bad-banking-app
+cd bad-banking-app.git
 ```
 
 3. **Install Dependencies**:
@@ -38,7 +42,7 @@ npm install
 npm start
 ```
 
-Your Bad Banking app will be running at http://localhost:3000.
+Your app will be running at http://localhost:3000.
 
 ## 🚀 Usage:
 
@@ -61,7 +65,7 @@ Log out to end your session.
 
 -The project uses React for building the user interface.
 -Form validation is handled with Formik and Yup.
--Account data and transactions are managed with state and local storage.
+-Account data and transactions are managed with firebase and mongodb.
 
 ## ⚠️ Known Issues:
 
